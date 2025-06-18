@@ -1,291 +1,577 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FrozenFizz</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="description" content="FrozenFizz is India's fizziest cold drink, crafted with bold flavors and real refreshment.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="FrozenFizz - Chill. Sip. Sparkle.">
+  <meta property="og:image" content="ChatGPT Image May 29, 2025, 10_08_40 PM.png">
+  <link rel="icon" href="ChatGPT Image May 29, 2025, 10_08_40 PM.png" type="image/png">
+  <title>FrozenFizz - Chill. Sip. Sparkle.</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Quicksand', sans-serif;
+      scroll-behavior: smooth;
     }
 
     body {
-      background-color: #0d1117;
-      color: #f0f0f0;
-      line-height: 1.6;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0a0a0a;
+      color: #e0e0e0;
       overflow-x: hidden;
     }
 
     header {
-      background-color: #0d1117;
-      padding: 1.5rem;
+      padding: 20px;
+      background: #0a0a0a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid #1f1f1f;
+    }
+
+    header h1 {
+      font-size: 32px;
+      background: linear-gradient(to right, #f5c663, #00f3ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #aaa;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #00f3ff;
+    }
+
+    section {
+      padding: 100px 30px;
       text-align: center;
-      border-bottom: 2px solid #00ffcc;
       position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    header img {
-      max-width: 250px;
-    }
-
-    .dropdown {
-      position: absolute;
-      top: 1.5rem;
-      right: 2rem;
-    }
-
-    .dropdown select {
-      padding: 0.5rem;
-      border-radius: 5px;
-      border: none;
-      background-color: #00ffcc;
-      color: #0d1117;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .bubbles {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .bubble {
-      position: absolute;
-      bottom: -50px;
-      width: 20px;
-      height: 20px;
-      background: #00ffcc;
-      border-radius: 50%;
-      opacity: 0.6;
-      animation: rise 10s infinite ease-in;
-    }
-
-    @keyframes rise {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 0.6;
-      }
-      100% {
-        transform: translateY(-1000px) scale(1.5);
-        opacity: 0;
-      }
+    section.visible {
+      opacity: 1;
+      transform: none;
     }
 
     .hero {
+      height: 100vh;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h2 {
+      font-size: 48px;
+      background: linear-gradient(to right, #f5c663, #00f3ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 17ch;
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .hero h2:hover {
+      transform: scale(1.05);
+      text-shadow: 0 0 15px rgba(0, 243, 255, 0.6);
+    }
+
+    .flavors {
+      background-color: #111;
+    }
+
+    .flavors h3 {
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+
+    .flavor-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .flavor {
+      width: 200px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 15px rgba(0,243,255,0.1);
+    }
+
+    .flavor:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 243, 255, 0.3);
+    }
+
+    .flavor img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .flavor:hover img {
+      transform: rotate(-2deg) scale(1.05);
+    }
+
+    .process, .contact, .about {
+      background: #121212;
+    }
+
+    .footer {
+      background: #0d0d0d;
+      padding: 20px;
       text-align: center;
-      padding: 6rem 2rem;
-      background: linear-gradient(120deg, #ffe29f, #ffa99f, #00ffcc);
-      color: #0d1117;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .about {
+      background: radial-gradient(circle at top left, #1e1e1e, #121212);
+      padding: 60px 30px;
+      border-radius: 16px;
+      max-width: 900px;
+      margin: auto;
+      box-shadow: 0 0 30px rgba(0, 243, 255, 0.05);
+      position: relative;
+    }
+    .about h3 {
+      font-size: 40px;
+      text-align: center;
+      margin-bottom: 35px;
+      background: linear-gradient(to right, #f5c663, #00f3ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+    }
+    .flavors h3 {
+      font-size: 40px;
+      text-align: center;
+      margin-bottom: 35px;
+      background: linear-gradient(to right, #f5c663, #00f3ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+    }
+    .process h3 {
+      font-size: 40px;
+      text-align: center;
+      margin-bottom: 35px;
+      background: linear-gradient(to right, #f5c663, #00f3ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+    }
+    .about-content {
+      font-size: 19px;
+      line-height: 1.8;
+      background: linear-gradient(to right, #1a1a1a, #1f1f1f);
+      padding: 40px;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0, 243, 255, 0.05);
       position: relative;
       overflow: hidden;
     }
-
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: slideDown 1.5s ease-out forwards;
+    .about-content::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0,243,255,0.05) 0%, transparent 60%);
+      animation: rotateBackground 25s linear infinite;
     }
-
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: slideUp 1.5s ease-out forwards;
-      animation-delay: 0.5s;
+    @keyframes rotateBackground {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
-
-    @keyframes slideDown {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .about-content:hover {
+      transform: scale(1.015);
+      box-shadow: 0 12px 32px rgba(0, 243, 255, 0.1);
     }
-
-    @keyframes slideUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .about-content strong {
+      color: #f5c663;
     }
-
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      padding: 4rem 2rem;
-      background-color: #1a1f2c;
-    }
-
-    .gallery img {
-      width: 300px;
-      border-radius: 1rem;
-      box-shadow: 0 4px 10px rgba(0, 255, 204, 0.2);
-      transition: transform 0.3s, opacity 1s ease;
-      opacity: 0;
-      transform: scale(0.95);
-      animation: fadeIn 1s forwards;
-    }
-
-    .gallery img:nth-child(1) { animation-delay: 0.3s; }
-    .gallery img:nth-child(2) { animation-delay: 0.6s; }
-    .gallery img:nth-child(3) { animation-delay: 0.9s; }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .features {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      padding: 4rem 2rem;
-      background-color: #121826;
-    }
-
-    .feature-box {
-      background: #1f2937;
-      padding: 2rem;
-      margin: 1rem;
-      border-radius: 1rem;
-      width: 300px;
+    .about-content em {
+      color: #00f3ff;
+      display: block;
+      margin-top: 30px;
+      font-style: italic;
+      font-size: 20px;
       text-align: center;
-      border: 2px solid #00ffcc;
-      transition: transform 0.3s;
+    }
+    .about-content p {
+      opacity: 0;
+      transform: translateY(40px);
     }
 
-    .feature-box:hover {
-      transform: translateY(-10px);
-    }
 
-    .feature-box h3::before {
-      content: '✨ ';
-    }
-
-    .feature-box h3 {
-      margin-bottom: 1rem;
-      color: #00ffcc;
-    }
-
-    .cta {
-      text-align: center;
-      padding: 3rem 2rem;
-      background: linear-gradient(270deg, #00ffcc, #ffa99f);
-      color: #0d1117;
-    }
-
-    .cta button {
-      margin-top: 1rem;
-      padding: 1rem 2rem;
-      font-size: 1rem;
+    .cta-button {
+      margin-top: 30px;
+      padding: 12px 30px;
+      font-size: 16px;
+      background: linear-gradient(270deg, #00f3ff, #f5c663, #00f3ff);
+      background-size: 400% 400%;
       border: none;
-      border-radius: 5px;
-      background-color: #0d1117;
-      color: #00ffcc;
+      border-radius: 30px;
+      color: #000;
+      font-weight: bold;
       cursor: pointer;
-      transition: transform 0.3s, background 0.3s;
-      animation: pulse 2s infinite;
+      transition: transform 0.3s ease;
+      animation: pulseGradient 8s ease infinite;
+    }
+    .bubble {
+      position: fixed;
+      bottom: -100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,243,255,0.2), rgba(0,243,255,0.05));
+      animation: floatUp linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 0.4; }
+      100% { transform: translateY(-200vh) scale(0.5); opacity: 0; }
     }
 
-    .cta button:hover {
-      background-color: #333;
-      transform: scale(1.05);
+
+    .cta-button:hover {
+      transform: scale(1.1);
     }
 
-    @keyframes pulse {
-      0%, 100% {
-        box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.7);
+    @media (max-width: 600px) {
+      .flavor-list {
+        flex-direction: column;
+        align-items: center;
       }
-      50% {
-        box-shadow: 0 0 10px 10px rgba(0, 255, 204, 0);
-      }
     }
 
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #0d1117;
-      border-top: 2px solid #00ffcc;
-      font-size: 0.9rem;
+    body::before {
+  content: "";
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0,243,255,0.2) 0%, transparent 80%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  opacity: var(--glow-visible, 1);
+  transition: opacity 0.3s ease;
+}
+
+    body::after {
+      content: "";
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.ibb.co/NLtVnkT/bubbles-bg.png') repeat;
+      animation: floatBubbles 60s linear infinite;
+      opacity: 0.03;
+      z-index: 0;
     }
-  </style>
+
+    @keyframes floatBubbles {
+      from { background-position: 0 0; }
+      to { background-position: 0 -1000px; }
+    }
+
+    @keyframes pulseGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+      .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .video-overlay video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.15);
+    }
+
+    .bubble-message {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 16px;
+      color: #00f3ff;
+      animation: floatUp 3s ease-in-out forwards;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translate(-50%, 0); opacity: 1; }
+      100% { transform: translate(-50%, -200px); opacity: 0; }
+    }
+</style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
-
-<body>
+  <div class="video-overlay" id="heroVideoContainer">
+    <video id="heroVideo" src="Untitled design.mp4" muted loop playsinline></video>
+  </div>
   <header>
-    <img src="final logo2.png" alt="FrozenFizz Logo" />
-    <div class="dropdown">
-      <select onchange="if (this.value) window.location.href=this.value">
-        <option value="">Online Store</option>
-        <option value="#">Swiggy</option>
-        <option value="#">Blinkit</option>
-        <option value="#">Zepto</option>
-      </select>
-    </div>
+    <h1>FrozenFizz</h1>
+    <nav>
+      <a href="#flavors">Flavors</a>
+      <a href="#process">Our Process</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <section class="hero">
-    <div class="bubbles">
-      <div class="bubble" style="left: 10%; animation-duration: 6s;"></div>
-      <div class="bubble" style="left: 30%; animation-duration: 8s;"></div>
-      <div class="bubble" style="left: 50%; animation-duration: 7s;"></div>
-      <div class="bubble" style="left: 70%; animation-duration: 9s;"></div>
-      <div class="bubble" style="left: 90%; animation-duration: 5s;"></div>
-    </div>
-    <h1>Welcome to FrozenFizz</h1>
-    <p>The ultimate refreshment experience — where icy coolness meets fizzy delight. Grab your chill now!</p>
+  <section class="hero visible">
+    <h2>Chill. Sip. Sparkle.</h2>
+    <p>Welcome to the fizzy revolution. Taste the spark of India.</p>
+    <button class="cta-button">Find FrozenFizz Near You</button>
   </section>
 
-  <section class="gallery">
-    <img src="ChatGPT Image May 29, 2025, 10_08_40 PM.png" alt="FrozenFizz Lime" />
-    <img src="ChatGPT Image May 29, 2025, 09_40_27 PM.png" alt="FrozenFizz Cola" />
-    <img src="ChatGPT Image May 29, 2025, 10_03_17 PM.png" alt="FrozenFizz Orange" />
-  </section>
-
-  <section class="features">
-    <div class="feature-box">
-      <h3>Natural Flavors</h3>
-      <p>Made with real fruit extracts for a burst of natural taste in every sip.</p>
-    </div>
-    <div class="feature-box">
-      <h3>Eco-Friendly</h3>
-      <p>Our bottles are 100% recyclable. Stay cool while caring for the planet.</p>
-    </div>
-    <div class="feature-box">
-      <h3>Chilled to Perfection</h3>
-      <p>Stored and served at just the right temperature for that frosty fizz.</p>
+  <section class="flavors" id="flavors">
+    <h3>Our Flavors</h3>
+    <div class="flavor-list">
+      <div class="flavor">
+        <img src="ChatGPT Image May 29, 2025, 10_08_40 PM.png" alt="Lime flavored FrozenFizz bottle">
+        <p>Lime</p>
+      </div>
+      <div class="flavor">
+        <img src="ChatGPT Image May 29, 2025, 10_03_17 PM.png" alt="Orange flavored FrozenFizz bottle">
+        <p>Orange</p>
+      </div>
+      <div class="flavor">
+        <img src="ChatGPT Image May 29, 2025, 09_40_27 PM.png" alt="Cola flavored FrozenFizz bottle">
+        <p>Cola</p>
+      </div>
     </div>
   </section>
 
-  <section class="cta">
-    <h2>Find a Store Near You</h2>
-    <p>FrozenFizz is now available in stores and online.</p>
-    <button>Shop Now</button>
+  <section class="process" id="process">
+    <h3 class="gsap-reveal">Our Process</h3>
+    <div class="about-content gsap-reveal">
+      <p>FrozenFizz is crafted with pure ingredients, locally sourced and carbonated with love. From farm to fizz, we ensure every bottle delivers delight.</p>
   </section>
 
-  <footer>
+  <!-- Floating Bubbles -->
+  <script>
+    const bubbleCount = window.innerWidth > 768 ? 120 : 60;
+    for (let i = 0; i < bubbleCount; i++) {
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.style.left = Math.random() * 100 + "vw";
+      const size = Math.random() * 20 + 5;
+      bubble.style.width = bubble.style.height = `${size}px`;
+      bubble.style.animationDuration = `${Math.random() * 10 + 10}s`;
+      bubble.style.animationDelay = `${Math.random() * 0}s`;
+      document.body.appendChild(bubble);
+    }
+  </script>
+
+  <section class="about" id="about">
+    <h3 class="gsap-reveal">About FrozenFizz</h3>
+      <div class="about-content gsap-reveal">
+        <p><strong>Every bottle of FrozenFizz carries a story —</strong> a spark born not in a lab, but in the heart of Indian streets, where flavor meets emotion. We began with a dream: to craft a cold drink that didn’t just quench thirst, but sparked joy, pride, and nostalgia in every Indian heart.</p>
+        <br>
+        <p><strong>Our journey started humble —</strong> a small bottling unit, a bold recipe, and a belief that taste can be powerful. Today, FrozenFizz is not just a drink; it's a movement. From chaiwalas stocking our 160ml fizz to weddings, festivals, and friend meetups — we’re becoming part of everyday India.</p>
+        <br>
+        <p><strong>What sets us apart?</strong><br>
+        ✨ Real flavors that pack a punch.<br>
+        🌿 Ingredients sourced from Indian farms.<br>
+        🤝 Support to local vendors and distributors.<br>
+        ♻️ Commitment to sustainability and minimal waste.</p>
+        <br>
+        <p>We believe in creating a brand that's <strong>homegrown, honest, and high-energy</strong>. When you sip FrozenFizz, you're not just drinking — you're participating in a fizzy celebration of Indian spirit.</p>
+        <em>Chill. Sip. Sparkle. This is our story. What's yours?</em>
+      </div>
+    </section>
+  
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+  
+      gsap.from(".about h3", {
+        scrollTrigger: {
+          trigger: ".about h3",
+          start: "top 80%",
+          toggleActions: "play none none reset"
+        },
+        opacity: 0,
+        scale: 0.6,
+        rotation: -10,
+        duration: 0.8,
+        ease: "back.out(1.7)"
+      });
+  
+      gsap.from(".about-content", {
+        scrollTrigger: {
+          trigger: ".about-content",
+          start: "top 80%",
+          toggleActions: "play none none reset",
+          scrub: true
+        },
+        opacity: 0,
+        y: 80,
+        duration: 1.2,
+        ease: "power3.out"
+      });
+  
+      gsap.utils.toArray(".about-content p").forEach((p, i) => {
+        gsap.to(p, {
+          scrollTrigger: {
+            trigger: p,
+            start: "top 90%",
+            toggleActions: "play none none none"
+          },
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: i * 0.1,
+          ease: "power2.out"
+        });
+      });
+    </script>
+  <section class="contact" id="contact">
+    <h3>Get in Touch</h3>
+    <p>Want to stock FrozenFizz or join the chill club?<br>Email: contact@frozenfizz.in</p>
+  </section>
+
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, {
+      threshold: 0.1
+    });
+    sections.forEach(section => observer.observe(section));
+
+    document.querySelectorAll('.flavor').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width/2;
+        const y = e.clientY - rect.top - rect.height/2;
+        card.style.transform = `rotateY(${x/20}deg) rotateX(${y/-20}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      });
+    });
+      const heroTitle = document.querySelector('.hero h2');
+    const heroVideoContainer = document.getElementById('heroVideoContainer');
+    const heroVideo = document.getElementById('heroVideo');
+
+    heroTitle.addEventListener('mouseenter', () => {
+      heroVideoContainer.style.opacity = '1';
+      heroVideo.play();
+    });
+
+    heroTitle.addEventListener('mouseleave', () => {
+      heroVideoContainer.style.opacity = '0';
+      heroVideo.pause();
+    });
+    window.addEventListener('scroll', () => {
+      if (!window._bubbleShown) {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble-message';
+        bubble.textContent = 'Thanks for choosing joy!';
+        document.body.appendChild(bubble);
+        setTimeout(() => {
+          bubble.remove();
+        }, 3000);
+        window._bubbleShown = true;
+      }
+    });
+document.addEventListener('mousemove', e => {
+  document.body.style.setProperty('--x', `${e.clientX}px`);
+  document.body.style.setProperty('--y', `${e.clientY}px`);
+  document.body.style.setProperty('--glow-visible', '1');
+});
+
+document.addEventListener('mouseleave', () => {
+  document.body.style.setProperty('--glow-visible', '0');
+});
+</script>
+<!-- Footer with Social Media Links -->
+  <div class="footer">
     <p>&copy; 2025 FrozenFizz. All rights reserved.</p>
-  </footer>
-</body>
+    <div class="social-links">
+      <a href="https://www.instagram.com/frozenfizz" target="_blank" aria-label="Instagram">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"/>
+      </a>
+      <a href="https://www.facebook.com/frozenfizz" target="_blank" aria-label="Facebook">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"/>
+      </a>
+      <a href="https://www.twitter.com/frozenfizz" target="_blank" aria-label="Twitter">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter"/>
+      </a>
+    </div>
+  </div>
 
+  <style>
+    .social-links {
+      margin-top: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .social-links a img {
+      width: 28px;
+      height: 28px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: brightness(1.2) drop-shadow(0 0 3px #00f3ff);
+    }
+
+    .social-links a:hover img {
+      transform: scale(1.2);
+      filter: brightness(1.5) drop-shadow(0 0 6px #00f3ff);
+    }
+  </style>
+  
+</body>
 </html>
